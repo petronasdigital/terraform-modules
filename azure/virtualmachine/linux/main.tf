@@ -120,6 +120,13 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
+resource "azurerm_availability_set" "main" {
+  name                = "${var.vm_name}"
+  location            = "${data.azurerm_resource_group.main.location}"
+  resource_group_name = "${data.azurerm_resource_group.main.name}"
+  tags                = "${var.tags}"
+}
+
 resource "azurerm_virtual_machine" "main" {
   count                         = "${var.vm_count}"
   name                          = "${format("%s%02.0f", var.vm_name, abs(count.index + 1))}"
@@ -129,6 +136,7 @@ resource "azurerm_virtual_machine" "main" {
   vm_size                       = "${var.vm_size}"
   delete_os_disk_on_termination = true
   tags                          = "${var.tags}"
+  availability_set_id           = "${azurerm_availability_set.main.id}"
 
   storage_image_reference {
     publisher = "${var.vm_image["publisher"]}"
