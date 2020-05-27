@@ -121,10 +121,11 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_availability_set" "main" {
-  name                = "${var.vm_name}"
-  location            = "${data.azurerm_resource_group.main.location}"
-  resource_group_name = "${data.azurerm_resource_group.main.name}"
-  tags                = "${var.tags}"
+  name                        = "${var.vm_name}"
+  location                    = "${data.azurerm_resource_group.main.location}"
+  resource_group_name         = "${data.azurerm_resource_group.main.name}"
+  platform_fault_domain_count = 2
+  tags                        = "${var.tags}"
 }
 
 resource "azurerm_virtual_machine" "main" {
