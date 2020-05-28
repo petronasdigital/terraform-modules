@@ -120,6 +120,10 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
+output "nic_ids" {
+  value = "${azurerm_network_interface.main.*.id}"
+}
+
 resource "azurerm_availability_set" "main" {
   name                        = "${var.vm_name}"
   location                    = "${data.azurerm_resource_group.main.location}"
