@@ -97,7 +97,7 @@ resource "azurerm_network_interface" "main" {
   name                      = "${format("nic-%s%02.0f", var.vm_name, abs(count.index + 1))}"
   location                  = "${data.azurerm_resource_group.main.location}"
   resource_group_name       = "${data.azurerm_resource_group.main.name}"
-  network_security_group_id = "${azurerm_network_security_group.nic_secgroup.*.id[count.index]}"
+  #network_security_group_id = "${azurerm_network_security_group.nic_secgroup.*.id[count.index]}"
   enable_ip_forwarding      = "true"
   tags                      = "${var.tags}"
 
