@@ -7,7 +7,7 @@ variable "vm_name" {
 }
 variable "location" {}
 variable "tags" {
-  type  = "map"
+  type  = map
 }
 variable "vm_count" {}
 variable "vm_size" {
@@ -17,5 +17,8 @@ variable "ssh_file_content" {}
 variable "admin_username" {}
 variable "vm_datadisk_size_gb" {}
 variable "vm_image" {
-  type  = "map"
+  type  = map
+}
+variable "vm_ids" {
+  type = list
 }
