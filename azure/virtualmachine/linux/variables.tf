@@ -20,5 +20,6 @@ variable "vm_image" {
   type  = map
 }
 variable "vm_ids" {
-  type = list
+  type    = list
+  default = []
 }
