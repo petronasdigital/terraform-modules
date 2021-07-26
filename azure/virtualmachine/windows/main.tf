@@ -134,12 +134,7 @@ resource "azurerm_virtual_machine" "main" {
     create_option = "FromImage"
   }
 
-  storage_image_reference {
-    publisher = "${var.vm_image["publisher"]}"
-    offer     = "${var.vm_image["offer"]}"
-    sku       = "${var.vm_image["sku"]}"
-    version   = "${var.vm_image["version"]}"
-  }
+  storage_image_reference = var.vm_image
 }
 
 resource "azurerm_managed_disk" "data_disk" {
