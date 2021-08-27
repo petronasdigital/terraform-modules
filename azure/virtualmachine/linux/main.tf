@@ -103,7 +103,7 @@ resource "azurerm_virtual_machine" "main" {
 }
 
 resource "azurerm_managed_disk" "data_disk" {
-  count                 = var.vm_count
+  count                 = var.create_data_disk ? var.vm_count : 0
   name                  = "${format("disk-%s%02.0f-data", var.vm_name, abs(count.index + 1))}"
   resource_group_name   = data.azurerm_resource_group.main.name
   location              = data.azurerm_resource_group.main.location
@@ -114,7 +114,7 @@ resource "azurerm_managed_disk" "data_disk" {
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "attach-datadisk" {
-  count               = var.vm_count
+  count                 = var.create_data_disk ? var.vm_count : 0
   managed_disk_id     = azurerm_managed_disk.data_disk.*.id[count.index]
   virtual_machine_id  = azurerm_virtual_machine.main.*.id[count.index]
   lun                 = "${count.index + 1}"
