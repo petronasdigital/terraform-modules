@@ -37,8 +37,8 @@ resource "azurerm_network_interface" "main" {
 
 resource "azurerm_network_interface_security_group_association" "main" {
   count                     = var.vm_count
-  network_interface_id      = azurerm_network_interface.main.id
-  network_security_group_id = azurerm_network_security_group.example.id
+  network_interface_id      = azurerm_network_interface.main[count.index].id
+  network_security_group_id = azurerm_network_security_group.nic_secgroup[count.index].id
 }
 
 output "nic_ids" {
