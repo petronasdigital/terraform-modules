@@ -15,11 +15,16 @@ variable "vm_size" {
 }
 variable "ssh_file_content" {}
 variable "admin_username" {}
-variable "vm_datadisk_size_gb" {}
+variable "vm_datadisk_size_gb" {
+  default = 0
+}
 variable "vm_image" {
   type  = map
 }
 variable "vm_ids" {
   type    = list
   default = []
+}
+variable "create_data_disk" {
+  default = true
 }
