@@ -19,3 +19,13 @@ variable "vm_datadisk_size_gb" {}
 variable "vm_image" {
   type  = map
 }
+variable "vm_ids" {
+  type    = list
+  default = []
+}
+variable "create_data_disk" {
+  default = true
+}
+variable "attach_nsg" {
+  default = false
+}

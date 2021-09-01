@@ -28,3 +28,6 @@ variable "vm_ids" {
 variable "create_data_disk" {
   default = true
 }
+variable "attach_nsg" {
+  default = false
+}
