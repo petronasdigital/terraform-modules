@@ -15,7 +15,9 @@ variable "vm_size" {
 }
 variable "admin_username" {}
 variable "admin_password" {}
-variable "vm_datadisk_size_gb" {}
+variable "vm_datadisk_size_gb" {
+  default = 0
+}
 variable "vm_image" {
   type  = map
 }
