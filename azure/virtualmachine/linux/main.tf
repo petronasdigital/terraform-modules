@@ -14,7 +14,7 @@ data "azurerm_resource_group" "main" {
 
 resource "azurerm_network_security_group" "nic_secgroup" {
   count               = var.attach_nsg ? var.vm_count : 0
-  name                = "${format("nsg-%s%02.0f", var.vm_name, abs(count.index + 1))}"
+  name                = format("nsg-%s%02.0f", var.vm_name, abs(count.index + 1))
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   tags                = var.tags
