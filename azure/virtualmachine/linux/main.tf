@@ -22,14 +22,14 @@ resource "azurerm_network_security_group" "nic_secgroup" {
 
 resource "azurerm_network_interface" "main" {
   count                     = var.vm_count
-  name                      = "${format("nic-%s%02.0f", var.vm_name, abs(count.index + 1))}"
+  name                      = format("nic-%s%02.0f", var.vm_name, abs(count.index + 1))
   location                  = data.azurerm_resource_group.main.location
   resource_group_name       = data.azurerm_resource_group.main.name
   enable_ip_forwarding      = true
   tags                      = var.tags
 
   ip_configuration {
-    name                          = "${format("ipconfig-%s%02.0f", var.vm_name, abs(count.index + 1))}"
+    name                          = format("ipconfig-%s%02.0f", var.vm_name, abs(count.index + 1))
     subnet_id                     = data.azurerm_subnet.vm_subnet.id
     private_ip_address_allocation = "Dynamic"
   }
@@ -59,7 +59,7 @@ resource "azurerm_availability_set" "main" {
 
 resource "azurerm_virtual_machine" "main" {
   count                         = var.vm_count
-  name                          = "${format("%s%02.0f", var.vm_name, abs(count.index + 1))}"
+  name                          = format("%s%02.0f", var.vm_name, abs(count.index + 1))
   location                      = data.azurerm_resource_group.main.location
   resource_group_name           = data.azurerm_resource_group.main.name
   network_interface_ids         = [azurerm_network_interface.main.*.id[count.index]]
@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   os_profile {
-    computer_name   = "${format("%s%02.0f", var.vm_name, abs(count.index + 1))}"
+    computer_name   = format("%s%02.0f", var.vm_name, abs(count.index + 1))
     admin_username  = var.admin_username
   }
 
@@ -90,7 +90,7 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   storage_os_disk {
-    name          = "${format("disk-%s%02.0f-OS", var.vm_name, abs(count.index + 1))}"
+    name          = format("disk-%s%02.0f-OS", var.vm_name, abs(count.index + 1))
     create_option = "FromImage"
   }
 
@@ -105,7 +105,7 @@ resource "azurerm_virtual_machine" "main" {
 
 resource "azurerm_managed_disk" "data_disk" {
   count                 = var.create_data_disk ? var.vm_count : 0
-  name                  = "${format("disk-%s%02.0f-data", var.vm_name, abs(count.index + 1))}"
+  name                  = format("disk-%s%02.0f-data", var.vm_name, abs(count.index + 1))
   resource_group_name   = data.azurerm_resource_group.main.name
   location              = data.azurerm_resource_group.main.location
   storage_account_type  = "Standard_LRS"
