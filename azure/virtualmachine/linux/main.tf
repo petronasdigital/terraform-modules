@@ -69,10 +69,11 @@ resource "azurerm_virtual_machine" "main" {
   availability_set_id           = azurerm_availability_set.main.id
 
   storage_image_reference {
-    publisher = var.vm_image["publisher"]
-    offer     = var.vm_image["offer"]
-    sku       = var.vm_image["sku"]
-    version   = var.vm_image["version"]
+    publisher = try(var.vm_image["publisher"], null)
+    offer     = try(var.vm_image["offer"], null)
+    sku       = try(var.vm_image["sku"], null)
+    version   = try(var.vm_image["version"], null)
+    id        = try(var.vm_image["image_id"], null)
   }
 
   os_profile {
