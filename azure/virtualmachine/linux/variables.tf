@@ -31,3 +31,6 @@ variable "create_data_disk" {
 variable "attach_nsg" {
   default = false
 }
+variable "datadisk_tier" {
+  default = "Standard_LRS"
+}
