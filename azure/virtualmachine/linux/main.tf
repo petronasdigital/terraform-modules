@@ -108,7 +108,7 @@ resource "azurerm_managed_disk" "data_disk" {
   name                  = format("disk-%s%02.0f-data", var.vm_name, abs(count.index + 1))
   resource_group_name   = data.azurerm_resource_group.main.name
   location              = data.azurerm_resource_group.main.location
-  storage_account_type  = "Standard_LRS"
+  storage_account_type  = var.datadisk_tier
   create_option         = "Empty"
   disk_size_gb          = var.vm_datadisk_size_gb
   tags                  = var.tags
