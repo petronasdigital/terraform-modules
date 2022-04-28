@@ -13,7 +13,7 @@ data "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_network_interface" "main" {
-  name                      = var.vm_name
+  name                      = format("nic-%s", var.vm_name)
   location                  = data.azurerm_resource_group.main.location
   resource_group_name       = data.azurerm_resource_group.main.name
   enable_ip_forwarding      = true
