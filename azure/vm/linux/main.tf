@@ -84,3 +84,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "attach-datadisk" {
   lun                 = 1
   caching             = "ReadWrite"
 }
+
+output "vm_id" {
+  value = azurerm_virtual_machine.main.id
+}
