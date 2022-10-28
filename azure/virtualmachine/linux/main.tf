@@ -49,6 +49,10 @@ output "vm_ips" {
   value = azurerm_network_interface.main.*.private_ip_address
 }
 
+output "vm_id" {
+  value = azurerm_virtual_machine.main.id
+}
+
 resource "azurerm_availability_set" "main" {
   name                        = var.vm_name
   location                    = data.azurerm_resource_group.main.location
